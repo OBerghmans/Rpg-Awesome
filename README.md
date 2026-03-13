@@ -65,17 +65,16 @@ docker compose run --rm lint
 
 ## Releasing
 
-Use `npm version` to bump the version, create a matching git tag, and push.
-The publish workflow handles the rest:
+Releases are driven by [rpg-awesome-raw](https://github.com/OpenDominion/rpg-awesome-raw).
+Once that repo has published a new release tag, trigger the **Update from rpg-awesome-raw**
+workflow in GitHub Actions with the matching version tag (e.g. `v0.0.21`). It will:
 
-```sh
-npm version patch   # or minor / major
-git push --follow-tags
-```
+1. Download the font and SCSS assets from the rpg-awesome-raw release
+2. Rebuild the CSS
+3. Bump `package.json` to the matching version
+4. Commit, tag, and publish to npm automatically
 
-`npm version` atomically updates `package.json` and creates a `vX.Y.Z` git tag.
-The publish workflow verifies the tag matches `package.json` before publishing,
-so the two can never drift apart.
+If the npm publish step fails, use the **Publish** workflow and select the tag to retry.
 
 An `NPM_TOKEN` secret with publish rights must be set in the repository settings.
 
