@@ -48,6 +48,36 @@ gem update --system && gem install scss-lint
 grunt
 ```
 
+### Docker (no local dependencies required)
+
+If you don't want to install Ruby and Node locally, you can build using Docker Compose:
+
+```sh
+docker compose build
+docker compose run --rm build
+```
+
+The compiled CSS files will be written to `./css/` on your host. To run the linter only:
+
+```sh
+docker compose run --rm lint
+```
+
+## Releasing
+
+Releases are driven by [rpg-awesome-raw](https://github.com/OpenDominion/rpg-awesome-raw).
+Once that repo has published a new release tag, trigger the **Update from rpg-awesome-raw**
+workflow in GitHub Actions with the matching version tag (e.g. `v0.0.21`). It will:
+
+1. Download the font and SCSS assets from the rpg-awesome-raw release
+2. Rebuild the CSS
+3. Bump `package.json` to the matching version
+4. Commit, tag, and publish to npm automatically
+
+If the npm publish step fails, use the **Publish** workflow and select the tag to retry.
+
+An `NPM_TOKEN` secret with publish rights must be set in the repository settings.
+
 ## Generating and Adding New Icons
 
 We have split up the generation process of the `/fonts` directory to

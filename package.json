@@ -2,7 +2,7 @@
   "name": "@opendominion/rpg-awesome",
   "style": "css/rpg-awesome.css",
   "sass": "scss/rpg-awesome.scss",
-  "version": "0.0.18",
+  "version": "0.0.20",
   "repository": {
     "type": "git",
     "url": "git://github.com/OpenDominion/Rpg-Awesome.git"
@@ -23,7 +23,15 @@
     "url": "https://github.com/OpenDominion/Rpg-Awesome/issues"
   },
   "homepage": "https://github.com/OpenDominion/Rpg-Awesome#readme",
-  "main": "Gruntfile.js",
+  "main": "css/rpg-awesome.css",
+  "files": [
+    "css/",
+    "fonts/",
+    "scss/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "",
   "license": "BSD",
   "dependencies": {
