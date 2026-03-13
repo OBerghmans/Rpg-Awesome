@@ -649,6 +649,12 @@
   }
 }
 
+.ra-chest {
+  &:before {
+    content: $ra-chest; 
+  }
+}
+
 .ra-chicken-leg {
   &:before {
     content: $ra-chicken-leg; 
@@ -2149,6 +2155,12 @@
   }
 }
 
+.ra-locked-chest {
+  &:before {
+    content: $ra-locked-chest; 
+  }
+}
+
 .ra-locked-fortress {
   &:before {
     content: $ra-locked-fortress; 
@@ -3133,15 +3145,15 @@
   }
 }
 
-.ra-sword {
-  &:before {
-    content: $ra-sword; 
-  }
-}
-
 .ra-sword-clash {
   &:before {
     content: $ra-sword-clash; 
+  }
+}
+
+.ra-sword {
+  &:before {
+    content: $ra-sword; 
   }
 }
 
