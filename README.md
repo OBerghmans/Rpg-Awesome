@@ -48,6 +48,37 @@ gem update --system && gem install scss-lint
 grunt
 ```
 
+### Docker (no local dependencies required)
+
+If you don't want to install Ruby and Node locally, you can build using Docker Compose:
+
+```sh
+docker compose build
+docker compose run --rm build
+```
+
+The compiled CSS files will be written to `./css/` on your host. To run the linter only:
+
+```sh
+docker compose run --rm lint
+```
+
+## Releasing
+
+Use `npm version` to bump the version, create a matching git tag, and push.
+The publish workflow handles the rest:
+
+```sh
+npm version patch   # or minor / major
+git push --follow-tags
+```
+
+`npm version` atomically updates `package.json` and creates a `vX.Y.Z` git tag.
+The publish workflow verifies the tag matches `package.json` before publishing,
+so the two can never drift apart.
+
+An `NPM_TOKEN` secret with publish rights must be set in the repository settings.
+
 ## Generating and Adding New Icons
 
 We have split up the generation process of the `/fonts` directory to

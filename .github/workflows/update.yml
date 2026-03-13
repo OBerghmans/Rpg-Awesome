@@ -1,0 +1,63 @@
+name: Update from rpg-awesome-raw
+
+on:
+  workflow_dispatch:
+    inputs:
+      raw_version:
+        description: 'rpg-awesome-raw version tag (e.g. v0.0.21)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Download assets from rpg-awesome-raw
+        run: |
+          gh release download ${{ inputs.raw_version }} \
+            --repo OBerghmans/rpg-awesome-raw \
+            --dir /tmp/raw
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Place assets
+        run: |
+          cp /tmp/raw/rpgawesome-webfont.eot fonts/
+          cp /tmp/raw/rpgawesome-webfont.ttf fonts/
+          cp /tmp/raw/rpgawesome-webfont.woff fonts/
+          cp /tmp/raw/rpgawesome-webfont.svg fonts/
+          cp /tmp/raw/_variables.scss scss/
+          cp /tmp/raw/_icons.scss scss/
+
+      - name: Bump version in package.json
+        run: |
+          VERSION="${{ inputs.raw_version }}"
+          VERSION="${VERSION#v}"
+          jq ".version = \"$VERSION\"" package.json > package.json.tmp
+          mv package.json.tmp package.json
+
+      - name: Build CSS
+        run: docker compose run --build --rm build
+
+      - name: Commit and tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add fonts/ scss/_variables.scss scss/_icons.scss css/ package.json
+          git commit -m "update to ${{ inputs.raw_version }}"
+          git tag ${{ inputs.raw_version }}
+          git push origin HEAD --follow-tags
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

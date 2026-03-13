@@ -23,7 +23,15 @@
     "url": "https://github.com/OpenDominion/Rpg-Awesome/issues"
   },
   "homepage": "https://github.com/OpenDominion/Rpg-Awesome#readme",
-  "main": "Gruntfile.js",
+  "main": "css/rpg-awesome.css",
+  "files": [
+    "css/",
+    "fonts/",
+    "scss/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "",
   "license": "BSD",
   "dependencies": {
