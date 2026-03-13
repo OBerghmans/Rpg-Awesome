@@ -50,7 +50,7 @@ jobs:
           git add fonts/ scss/_variables.scss scss/_icons.scss css/ package.json
           git commit -m "update to ${{ inputs.raw_version }}"
           git tag ${{ inputs.raw_version }}
-          git push origin HEAD --follow-tags
+          git push origin HEAD ${{ inputs.raw_version }}
 
       - uses: actions/setup-node@v6
         with:
