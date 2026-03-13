@@ -19,7 +19,7 @@ jobs:
       - name: Download assets from rpg-awesome-raw
         run: |
           gh release download ${{ inputs.raw_version }} \
-            --repo OBerghmans/rpg-awesome-raw \
+            --repo OpenDominion/rpg-awesome-raw \
             --dir /tmp/raw
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
