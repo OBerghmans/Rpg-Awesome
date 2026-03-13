@@ -1,9 +1,7 @@
 name: Publish
 
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -19,9 +17,6 @@ jobs:
             echo "Error: tag $GITHUB_REF_NAME does not match package.json version $PKG_VERSION"
             exit 1
           fi
-
-      - name: Build
-        run: docker compose run --build --rm build
 
       - uses: actions/setup-node@v6
         with:
