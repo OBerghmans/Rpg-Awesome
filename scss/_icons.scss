@@ -787,6 +787,12 @@
   }
 }
 
+.ra-corset {
+  &:before {
+    content: $ra-corset; 
+  }
+}
+
 .ra-cowled {
   &:before {
     content: $ra-cowled; 
@@ -1222,6 +1228,12 @@
 .ra-energise {
   &:before {
     content: $ra-energise; 
+  }
+}
+
+.ra-evil-wings {
+  &:before {
+    content: $ra-evil-wings; 
   }
 }
 
@@ -2542,6 +2554,12 @@
 .ra-prank-glasses {
   &:before {
     content: $ra-prank-glasses; 
+  }
+}
+
+.ra-pretty-fangs {
+  &:before {
+    content: $ra-pretty-fangs; 
   }
 }
 
